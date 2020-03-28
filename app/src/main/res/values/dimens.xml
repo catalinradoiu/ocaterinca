@@ -10,4 +10,6 @@
     <dimen name="player_avatar_size">72dp</dimen>
     <dimen name="question_card_vertical_margin">64dp</dimen>
     <dimen name="player_item_size">120dp</dimen>
+    <dimen name="card_horizontal_margin">24dp</dimen>
+    <dimen name="secondary_margin">32dp</dimen>
 </resources>

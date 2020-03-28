@@ -5,4 +5,6 @@
     <string name="user_cancelled">User cancelled</string>
     <string name="or">Or</string>
     <string name="error_getting_firebase_token">Please update google play services or turn on the internet connection</string>
+    <string name="new_game_code">new game code</string>
+    <string name="create_or_join">create or join</string>
 </resources>
