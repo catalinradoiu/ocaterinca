@@ -8,8 +8,13 @@ import timber.log.Timber
 
 class Caterincapp : Application() {
 
+    companion object {
+        lateinit var instance: Caterincapp
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
         initPrefs()
         initDI()
         initLogging()
