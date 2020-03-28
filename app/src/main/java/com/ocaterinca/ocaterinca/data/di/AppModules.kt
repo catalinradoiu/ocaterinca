@@ -8,7 +8,6 @@ object AppModules {
 //        single { retrofit.CreateServiceBLabla }
     }
 
-
     val modules =
         listOf(apiModules)
 }
