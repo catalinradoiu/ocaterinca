@@ -9,12 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.google.gson.Gson
 import com.ocaterinca.ocaterinca.AvatarCardFragmentBinding
 import com.ocaterinca.ocaterinca.R
-import com.ocaterinca.ocaterinca.utils.MessageService
-import org.jetbrains.anko.support.v4.toast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.aprilapps.easyphotopicker.ChooserType
 import pl.aprilapps.easyphotopicker.EasyImage
 import pl.aprilapps.easyphotopicker.MediaFile
@@ -29,7 +26,7 @@ class AvatarCardFragment : Fragment() {
     }
 
     private lateinit var binding: AvatarCardFragmentBinding
-    private val viewModel = AvatarCardViewModel()
+    private val avatarCardViewModel: AvatarCardViewModel by viewModel()
     private lateinit var easyImage: EasyImage
 
     override fun onCreateView(
@@ -43,8 +40,11 @@ class AvatarCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-        initStuff()
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = avatarCardViewModel
+        }
+        initImagePicker()
         initListeners()
     }
 
@@ -55,11 +55,11 @@ class AvatarCardFragment : Fragment() {
         binding.userAvatar.setOnClickListener(avatarClickListener)
         binding.userAvatarPlaceholder.setOnClickListener(avatarClickListener)
         binding.nextButton.setOnClickListener {
-
+            avatarCardViewModel.uploadImage()
         }
     }
 
-    private fun initStuff() {
+    private fun initImagePicker() {
         easyImage = EasyImage.Builder(requireContext())
             .setChooserType(ChooserType.CAMERA_AND_GALLERY)
             .build()
@@ -124,7 +124,7 @@ class AvatarCardFragment : Fragment() {
 
         override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
             if (imageFiles.isNotEmpty()) {
-                viewModel.pickedImage(imageFiles[0].file)
+                avatarCardViewModel.pickedImage(imageFiles[0].file)
             }
         }
     }

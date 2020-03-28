@@ -1,10 +1,16 @@
 package com.ocaterinca.ocaterinca.feature.gamecode
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ocaterinca.ocaterinca.utils.Prefs
 import com.ocaterinca.ocaterinca.utils.dependantLiveData
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class GameCodeViewModel : ViewModel() {
+class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : ViewModel() {
 
     val gameCode = MutableLiveData<String>()
 
@@ -12,7 +18,24 @@ class GameCodeViewModel : ViewModel() {
         gameCode.value?.isNotEmpty() ?: false
     }
 
-    val nextButtonAlpha = dependantLiveData(nextEnabled) {
-        if (nextEnabled.value == true) 1f else .5f
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    val nextButtonAlpha = dependantLiveData(nextEnabled, isLoading) {
+        if (nextEnabled.value == true || isLoading.value == true) 1f else .5f
+    }
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _isLoading.value = false
+        Timber.e(throwable)
+    }
+
+    fun createOrJoinGroup() {
+        viewModelScope.launch(exceptionHandler) {
+            _isLoading.value = true
+            val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
+            Timber.e("Is admin : ${response.isAdmin}")
+            _isLoading.value = false
+        }
     }
 }

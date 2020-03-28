@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.ocaterinca.ocaterinca.GameCodeFragmentBinding
 import com.ocaterinca.ocaterinca.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameCodeFragment : Fragment() {
 
     private lateinit var binding: GameCodeFragmentBinding
-    private val viewModel = GameCodeViewModel()
+    private val gameCodeViewModel: GameCodeViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game_code, container, false)
@@ -23,7 +24,11 @@ class GameCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@GameCodeFragment.viewModel
+            viewModel = this@GameCodeFragment.gameCodeViewModel
+        }
+
+        binding.nextButton.setOnClickListener {
+            gameCodeViewModel.createOrJoinGroup()
         }
     }
 }
