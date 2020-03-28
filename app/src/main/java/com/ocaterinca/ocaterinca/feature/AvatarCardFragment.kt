@@ -13,6 +13,9 @@ import com.ocaterinca.ocaterinca.R
 
 class AvatarCardFragment : Fragment() {
 
+    companion object {
+        const val REQUEST_PERMISSIONS = 200
+    }
     private lateinit var binding: AvatarCardFragmentBinding
     private val viewModel = AvatarCardViewModel()
 

@@ -54,6 +54,10 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
+    // other
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
