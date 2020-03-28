@@ -39,6 +39,7 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
             val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
             Prefs.isAdmin = response.isAdmin
             Prefs.roomId = response.roomId
+//            response.players
             _hasJoinedGroup.value = true
             Timber.e("Is admin : ${response.isAdmin}")
             _isLoading.value = false
