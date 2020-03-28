@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OCaterinca</string>
+    <string name="app_name">ocaterinca</string>
     <string name="next">next</string>
     <string name="image_storage_and_camera_rationale">We need permission for uploading your image</string>
     <string name="user_cancelled">User cancelled</string>
