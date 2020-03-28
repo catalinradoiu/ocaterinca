@@ -29,9 +29,13 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.playersList.apply {
-            adapter = playersAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@QuestionFragment.viewModel
+            binding.playersList.apply {
+                adapter = playersAdapter
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            }
         }
 
         viewModel.playersList.observe(viewLifecycleOwner, Observer {

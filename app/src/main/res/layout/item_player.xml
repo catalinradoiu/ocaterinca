@@ -33,6 +33,7 @@
             android:layout_height="@dimen/player_avatar_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:imageUrl="@{viewModel.avatarUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/answered_check_mark"
             tools:ignore="ContentDescription"

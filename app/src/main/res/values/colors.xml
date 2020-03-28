@@ -6,5 +6,4 @@
     <color name="colorPrimary">@color/app_color</color>
     <color name="colorPrimaryDark">@color/app_color</color>
     <color name="colorAccent">@color/action_color</color>
-    <color name="black">#000000</color>
 </resources>
