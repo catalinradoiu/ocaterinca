@@ -6,4 +6,8 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="font_size">18sp</dimen>
     <dimen name="small_margin">8dp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="player_avatar_size">72dp</dimen>
+    <dimen name="question_card_vertical_margin">64dp</dimen>
+    <dimen name="player_item_size">120dp</dimen>
 </resources>
