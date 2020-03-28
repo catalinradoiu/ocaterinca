@@ -34,7 +34,7 @@ class PlayersAdapter : ListAdapter<Player, PlayersAdapter.PlayerViewHolder>(
         }
 
         fun bind(player: Player) {
-            binding.viewModel.apply {
+            binding.viewModel?.apply {
                 avatarUrl.set(player.avatarUrl)
             }
         }
