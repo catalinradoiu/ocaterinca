@@ -16,6 +16,7 @@
 
         <ImageView
             android:id="@+id/answered_check_mark"
+            visibleInvisible="@{viewModel.voted}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_check_circle_24dp"
@@ -24,16 +25,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibleGone="@{viewModel.playerAnswered}"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/player_avatar"
             android:layout_width="@dimen/player_avatar_size"
             android:layout_height="@dimen/player_avatar_size"
+            app:imageUrl="@{viewModel.avatarUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:imageUrl="@{viewModel.avatarUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/answered_check_mark"
             tools:ignore="ContentDescription"

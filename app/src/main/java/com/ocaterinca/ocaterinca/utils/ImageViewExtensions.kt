@@ -19,6 +19,11 @@ fun View.setVisibleGone(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
+@BindingAdapter("visibleInvisible")
+fun View.setVisibleInvisible(isVisible: Boolean) {
+    visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+}
+
 fun View.resizeAnim(size: Float) {
     if (width == 0 || height == 0) {
         return

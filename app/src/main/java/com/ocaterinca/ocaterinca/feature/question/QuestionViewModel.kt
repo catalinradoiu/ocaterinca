@@ -9,8 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.ocaterinca.ocaterinca.R
 import com.ocaterinca.ocaterinca.core.model.NewRoundPush
 import com.ocaterinca.ocaterinca.core.model.Player
+import com.ocaterinca.ocaterinca.core.model.RefreshUsersPush
 import com.ocaterinca.ocaterinca.core.model.RoundOverPush
 import com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerViewModel
+import com.ocaterinca.ocaterinca.feature.question.player.PlayerItemViewModel
 import com.ocaterinca.ocaterinca.utils.Prefs
 import com.ocaterinca.ocaterinca.utils.grabString
 
@@ -64,6 +66,19 @@ class QuestionViewModel : ViewModel() {
             )
         }, 6000)
 
+
+        Handler().postDelayed({
+            gotPush(
+                RefreshUsersPush(
+                    players = mutableListOf(
+                        Player("1", "https://www.w3schools.com/w3images/avatar4.png", true),
+                        Player("2", "https://www.w3schools.com/w3images/avatar3.png"),
+                        Player("3", "https://www.w3schools.com/w3images/avatar2.png"),
+                        Player("4", "https://www.w3schools.com/w3images/avatar1.png")
+                    )
+                )
+            )
+        }, 4000)
     }
 
     fun start() {
@@ -73,10 +88,22 @@ class QuestionViewModel : ViewModel() {
         mockEvents()
     }
 
+    private fun playersToViewModel(players: Collection<Player>): MutableList<PlayerItemViewModel> {
+        return players.map {
+            PlayerItemViewModel(
+                avatarUrl = it.image,
+                voted = it.voted
+            )
+        }.toMutableList()
+    }
+
     private fun gotPush(push: Any?) {
         showRestart.set(Prefs.isAdmin == true)
         nextText.set(grabString(R.string.next))
         when (push) {
+            is RefreshUsersPush -> {
+                _playersList.value = playersToViewModel(push.players)
+            }
             is NewRoundPush -> {
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
                 questionText.set(push.title)
@@ -103,10 +130,10 @@ class QuestionViewModel : ViewModel() {
         // backend request
     }
 
-    private val _playersList = MutableLiveData<List<Player>>().apply {
-        value = PLAYERS_MOCK_LIST
+    private val _playersList = MutableLiveData<List<PlayerItemViewModel>>().apply {
+        value = playersToViewModel(PLAYERS_MOCK_LIST)
     }
-    val playersList: LiveData<List<Player>> = _playersList
+    val playersList: LiveData<List<PlayerItemViewModel>> = _playersList
 
     companion object {
         private val PLAYERS_MOCK_LIST = listOf(
