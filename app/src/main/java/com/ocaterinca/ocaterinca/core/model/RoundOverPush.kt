@@ -2,6 +2,7 @@ package com.ocaterinca.ocaterinca.core.model
 
 data class RoundOverPush(
     val title: String?,
-    val winnerImage: String?,
-    val loserImage: String?
+    val player1Image: String?,
+    val player2Image: String?,
+    val player1Won: Boolean?
 )

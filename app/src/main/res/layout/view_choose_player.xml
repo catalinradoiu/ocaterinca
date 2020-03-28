@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="#ffffff">
+
+        <TextView
+            android:id="@+id/or_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/or"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/large_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/player1_image"
+            imageUrl="@{viewModel.player1Image}"
+            android:layout_width="@dimen/player_avatar_size"
+            android:layout_height="@dimen/player_avatar_size"
+            android:contentDescription="@null"
+            android:onClick="@{(v)->viewModel.player1Tap()}"
+            app:layout_constraintBottom_toBottomOf="@id/or_text"
+            app:layout_constraintEnd_toStartOf="@id/or_text"
+            app:layout_constraintTop_toTopOf="@id/or_text"
+            tools:src="@mipmap/ic_app_launcher" />
+
+        <ImageView
+            android:id="@+id/player2_image"
+            imageUrl="@{viewModel.player2Image}"
+            android:layout_width="@dimen/player_avatar_size"
+            android:layout_height="@dimen/player_avatar_size"
+            android:contentDescription="@null"
+            android:onClick="@{(v)->viewModel.player2Tap()}"
+            app:layout_constraintBottom_toBottomOf="@id/or_text"
+            app:layout_constraintStart_toEndOf="@id/or_text"
+            app:layout_constraintTop_toTopOf="@id/or_text"
+            tools:src="@mipmap/ic_app_launcher" />
+
+        <View
+            visibleGone="@{viewModel.player1Selected}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha=".5"
+            android:background="@drawable/player_selected_overlay"
+            app:layout_constraintBottom_toBottomOf="@id/player1_image"
+            app:layout_constraintEnd_toEndOf="@id/player1_image"
+            app:layout_constraintStart_toStartOf="@id/player1_image"
+            app:layout_constraintTop_toTopOf="@id/player1_image" />
+
+        <View
+            visibleGone="@{viewModel.player2Selected}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha=".5"
+            android:background="@drawable/player_selected_overlay"
+            app:layout_constraintBottom_toBottomOf="@id/player2_image"
+            app:layout_constraintEnd_toEndOf="@id/player2_image"
+            app:layout_constraintStart_toStartOf="@id/player2_image"
+            app:layout_constraintTop_toTopOf="@id/player2_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

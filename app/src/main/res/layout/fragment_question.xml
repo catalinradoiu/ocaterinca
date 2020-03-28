@@ -45,45 +45,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Some text for this question" />
 
-                <ImageView
-                    android:id="@+id/first_player_image"
-                    android:layout_width="@dimen/player_avatar_size"
-                    android:layout_height="@dimen/player_avatar_size"
-                    app:imageUrl="@{viewModel.firstPlayerAvatarUrl}"
+                <com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerView
+                    android:layout_width="match_parent"
+                    choosePlayerState="@{viewModel.choosePlayerState}"
+                    android:layout_height="0dp"
+                    choosePlayerViewModel="@{viewModel.choosePlayerViewModel}"
                     app:layout_constraintBottom_toTopOf="@id/players_list"
-                    app:layout_constraintEnd_toStartOf="@id/vs_text"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/question_text"
-                    tools:ignore="ContentDescription"
-                    tools:src="@tools:sample/avatars" />
-
-                <TextView
-                    android:id="@+id/vs_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/primary_margin"
-                    android:layout_marginEnd="@dimen/primary_margin"
-                    android:text="@string/or"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/large_text_size"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/players_list"
-                    app:layout_constraintEnd_toStartOf="@id/second_player_image"
-                    app:layout_constraintStart_toEndOf="@id/first_player_image"
                     app:layout_constraintTop_toBottomOf="@id/question_text" />
-
-                <ImageView
-                    android:id="@+id/second_player_image"
-                    android:layout_width="@dimen/player_avatar_size"
-                    android:layout_height="@dimen/player_avatar_size"
-                    app:imageUrl="@{viewModel.secondPlayerAvatarUrl}"
-                    app:layout_constraintBottom_toTopOf="@id/players_list"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/vs_text"
-                    app:layout_constraintTop_toBottomOf="@id/question_text"
-                    tools:ignore="ContentDescription"
-                    tools:src="@tools:sample/avatars" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/players_list"

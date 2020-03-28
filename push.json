@@ -18,22 +18,17 @@
     "event": "NEW_ROUND",
     "data": {
       "title": "1. Cine e mai destept?",
-      "player1": {
-        "userId": "fane",
-        "image": "url"
-      },
-      "player2": {
-        "userId": "fane",
-        "image": "url"
-      }
+      "player1Image": "string",
+      "player2Image": "string"
     }
   },
   {
     "event": "ROUND_OVER",
     "data": {
       "title": "1. Cine e cel mai destept?",
-      "winnerImage": "image",
-      "loserImage": "image"
+      "player1Image": "string",
+      "player2Image": "string",
+      "player1Won": true
     }
   },
   {

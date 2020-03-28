@@ -3,6 +3,7 @@
     <dimen name="primary_margin">16dp</dimen>
     <dimen name="card_corner_radius">24dp</dimen>
     <dimen name="avatar_image_size">150dp</dimen>
+    <dimen name="small_image_size">80dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="large_text_size">20sp</dimen>
