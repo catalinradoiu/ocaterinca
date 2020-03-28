@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.QuestionFragmentBinding
@@ -38,7 +37,6 @@ class QuestionFragment : Fragment() {
             viewModel = this@QuestionFragment.viewModel
             binding.playersList.apply {
                 adapter = playersAdapter
-                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             }
         }
         initObservers()
@@ -47,6 +45,7 @@ class QuestionFragment : Fragment() {
     private fun initObservers() {
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
+            binding.playersList.layoutManager = GridLayoutManager(requireContext(), it.size)
         })
 
         MessageService.messageReceiver.observe(viewLifecycleOwner, Observer {

@@ -11,31 +11,33 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/player_item_size"
-        android:layout_height="@dimen/player_item_size">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/answered_check_mark"
             visibleInvisible="@{viewModel.voted}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_margin"
             android:src="@drawable/ic_check_circle_24dp"
             android:tint="@color/action_color"
             app:layout_constraintBottom_toTopOf="@id/player_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/player_avatar"
-            android:layout_width="@dimen/player_avatar_size"
-            android:layout_height="@dimen/player_avatar_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/player_avatar_size"
             app:imageUrl="@{viewModel.avatarUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/answered_check_mark"
             tools:ignore="ContentDescription"
             tools:src="@tools:sample/avatars" />
 

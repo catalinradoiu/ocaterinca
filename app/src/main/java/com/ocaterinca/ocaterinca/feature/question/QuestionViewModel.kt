@@ -67,18 +67,21 @@ class QuestionViewModel : ViewModel() {
         }, 6000)
 
 
-        Handler().postDelayed({
-            gotPush(
-                RefreshUsersPush(
-                    players = mutableListOf(
-                        Player("1", "https://www.w3schools.com/w3images/avatar4.png", true),
-                        Player("2", "https://www.w3schools.com/w3images/avatar3.png"),
-                        Player("3", "https://www.w3schools.com/w3images/avatar2.png"),
-                        Player("4", "https://www.w3schools.com/w3images/avatar1.png")
+        for (i in 1..10) {
+            Handler().postDelayed({
+                gotPush(
+                    RefreshUsersPush(
+                        players = mutableListOf<Player>().apply {
+                            for (j in 1..i+1) {
+                                add(Player("1", "https://www.w3schools.com/w3images/avatar$j.png", Math.random() < .5))
+                            }
+                        }
                     )
                 )
-            )
-        }, 4000)
+            }, (i * 1000).toLong())
+
+        }
+
     }
 
     fun start() {
