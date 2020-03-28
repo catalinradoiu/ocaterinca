@@ -1,5 +1,6 @@
 package com.ocaterinca.ocaterinca.data.di
 
+import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.feature.AvatarCardInteractor
 import com.ocaterinca.ocaterinca.feature.AvatarCardViewModel
 import com.ocaterinca.ocaterinca.feature.AvatarService
@@ -32,6 +33,7 @@ object AppModules {
     private val viewModelModule = module {
         viewModel { AvatarCardViewModel(get()) }
         viewModel { GameCodeViewModel(get()) }
+        viewModel { GameViewModel() }
     }
 
     val modules =

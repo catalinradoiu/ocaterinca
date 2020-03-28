@@ -7,4 +7,6 @@
     <string name="error_getting_firebase_token">Please update google play services or turn on the internet connection</string>
     <string name="new_game_code">new game code</string>
     <string name="create_or_join">create or join</string>
+    <string name="restart">restart</string>
+    <string name="start">start</string>
 </resources>

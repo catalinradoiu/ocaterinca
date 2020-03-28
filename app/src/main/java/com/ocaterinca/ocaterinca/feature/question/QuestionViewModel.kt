@@ -1,20 +1,28 @@
 package com.ocaterinca.ocaterinca.feature.question
 
 import android.os.Handler
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ocaterinca.ocaterinca.R
 import com.ocaterinca.ocaterinca.core.model.NewRoundPush
 import com.ocaterinca.ocaterinca.core.model.Player
 import com.ocaterinca.ocaterinca.core.model.RoundOverPush
 import com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerViewModel
+import com.ocaterinca.ocaterinca.utils.Prefs
 
 class QuestionViewModel : ViewModel() {
 
     val choosePlayerViewModel = ChoosePlayerViewModel(this::votePlayer1, this::votePlayer2)
     val choosePlayerState = ObservableField<ChoosePlayerViewModel.State>()
     val questionText = ObservableField<String>()
+
+    val showNext = ObservableBoolean()
+    val showRestart = ObservableBoolean()
+    val nextText = ObservableInt()
 
     init {
         gotPush(
@@ -58,7 +66,15 @@ class QuestionViewModel : ViewModel() {
 
     }
 
+    fun start() {
+        nextText.set(R.string.start)
+        showNext.set(Prefs.isAdmin == true)
+        showRestart.set(false)
+    }
+
     private fun gotPush(push: Any?) {
+        showRestart.set(true)
+        nextText.set(R.string.next)
         when (push) {
             is NewRoundPush -> {
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
