@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -45,10 +44,6 @@ class QuestionFragment : Fragment() {
         initObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        toast("On rezum")
-    }
     private fun initObservers() {
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
@@ -59,7 +54,6 @@ class QuestionFragment : Fragment() {
         })
         gameViewModel.gameStarted.observe(viewLifecycleOwner, Observer {
             if (it) {
-                toast("Start game")
                 viewModel.start()
             }
         })

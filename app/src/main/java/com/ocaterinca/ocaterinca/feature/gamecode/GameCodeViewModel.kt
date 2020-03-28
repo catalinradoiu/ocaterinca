@@ -34,6 +34,7 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
         viewModelScope.launch(exceptionHandler) {
             _isLoading.value = true
             val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
+            Prefs.isAdmin = response.isAdmin
             Timber.e("Is admin : ${response.isAdmin}")
             _isLoading.value = false
         }

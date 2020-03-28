@@ -20,8 +20,8 @@ class QuestionViewModel : ViewModel() {
     val choosePlayerState = ObservableField<ChoosePlayerViewModel.State>()
     val questionText = ObservableField<String>()
 
-    val showNext = ObservableBoolean()
-    val showRestart = ObservableBoolean()
+    val showNext = ObservableBoolean(false)
+    val showRestart = ObservableBoolean(false)
     val nextText = ObservableInt()
 
     init {
@@ -73,7 +73,7 @@ class QuestionViewModel : ViewModel() {
     }
 
     private fun gotPush(push: Any?) {
-        showRestart.set(true)
+        showRestart.set(Prefs.isAdmin == true)
         nextText.set(R.string.next)
         when (push) {
             is NewRoundPush -> {
