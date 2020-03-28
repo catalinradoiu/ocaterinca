@@ -1,5 +1,6 @@
 package com.ocaterinca.ocaterinca.data.di
 
+import com.ocaterinca.ocaterinca.BuildConfig
 import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.feature.AvatarCardInteractor
 import com.ocaterinca.ocaterinca.feature.AvatarCardViewModel
@@ -7,6 +8,8 @@ import com.ocaterinca.ocaterinca.feature.AvatarService
 import com.ocaterinca.ocaterinca.feature.gamecode.GameCodeInteractor
 import com.ocaterinca.ocaterinca.feature.gamecode.GameCodeService
 import com.ocaterinca.ocaterinca.feature.gamecode.GameCodeViewModel
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -18,6 +21,15 @@ object AppModules {
         Retrofit.Builder()
             .baseUrl("https://e3tepsac4l.execute-api.eu-west-1.amazonaws.com/dev/")
             .addConverterFactory(MoshiConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                        }
+                    )
+                    .build()
+            )
             .build()
 
     private val apiModules = module {

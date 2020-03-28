@@ -4,5 +4,7 @@ import com.squareup.moshi.Json
 
 data class CodeUploadReponse(
     @Json(name = "isAdmin")
-    val isAdmin: Boolean
+    val isAdmin: Boolean?,
+    @Json(name = "roomId")
+    val roomId: String?
 )

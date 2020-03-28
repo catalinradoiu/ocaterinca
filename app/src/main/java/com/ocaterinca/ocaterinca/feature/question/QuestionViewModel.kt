@@ -1,6 +1,5 @@
 package com.ocaterinca.ocaterinca.feature.question
 
-import android.os.Handler
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -26,69 +25,10 @@ class QuestionViewModel : ViewModel() {
     val showRestart = ObservableBoolean(false)
     val nextText = ObservableField<String>()
 
-    private fun mockEvents() {
-        gotPush(
-            NewRoundPush(
-                "1. Cine e mai smecher?",
-                "https://www.w3schools.com/w3images/avatar1.png",
-                "https://www.w3schools.com/w3images/avatar2.png"
-            )
-        )
-        Handler().postDelayed({
-            gotPush(
-                RoundOverPush(
-                    "1. Cine e mai smecher raspunsuri",
-                    "https://www.w3schools.com/w3images/avatar1.png",
-                    "https://www.w3schools.com/w3images/avatar2.png",
-                    false
-                )
-            )
-        }, 3000)
-
-        Handler().postDelayed({
-            gotPush(
-                RoundOverPush(
-                    "1. Cine e mai smecher raspunsuri",
-                    "https://www.w3schools.com/w3images/avatar1.png",
-                    "https://www.w3schools.com/w3images/avatar2.png",
-                    false
-                )
-            )
-        }, 6000)
-
-        Handler().postDelayed({
-            gotPush(
-                NewRoundPush(
-                    "2. Cine e mai dejtept?",
-                    "https://www.w3schools.com/w3images/avatar1.png",
-                    "https://www.w3schools.com/w3images/avatar2.png"
-                )
-            )
-        }, 6000)
-
-
-        for (i in 1..10) {
-            Handler().postDelayed({
-                gotPush(
-                    RefreshUsersPush(
-                        players = mutableListOf<Player>().apply {
-                            for (j in 1..i + 1) {
-                                add(Player("1", "https://www.w3schools.com/w3images/avatar$j.png", Math.random() < .5))
-                            }
-                        }
-                    )
-                )
-            }, (i * 1000).toLong())
-
-        }
-
-    }
-
     fun start() {
         nextText.set(grabString(R.string.start))
         showNext.set(Prefs.isAdmin == true)
         showRestart.set(false)
-        mockEvents()
     }
 
     private fun playersToViewModel(players: Collection<Player>): MutableList<PlayerItemViewModel> {
@@ -134,16 +74,8 @@ class QuestionViewModel : ViewModel() {
     }
 
     private val _playersList = MutableLiveData<List<PlayerItemViewModel>>().apply {
-        value = playersToViewModel(PLAYERS_MOCK_LIST)
+        value = mutableListOf()
     }
     val playersList: LiveData<List<PlayerItemViewModel>> = _playersList
-
-    companion object {
-        private val PLAYERS_MOCK_LIST = listOf(
-            Player("1", "https://www.w3schools.com/w3images/avatar1.png"),
-            Player("2", "https://www.w3schools.com/w3images/avatar3.png"),
-            Player("3", "https://www.w3schools.com/w3images/avatar2.png")
-        )
-    }
 
 }
