@@ -12,14 +12,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/primary_margin"
+        android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/primary_margin">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="@dimen/primary_margin"
             app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/user_avatar"
+                    android:id="@+id/user_avatar_placeholder"
                     android:layout_width="@dimen/avatar_image_size"
                     android:layout_height="@dimen/avatar_image_size"
                     android:src="@drawable/ic_account"
@@ -41,16 +42,28 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 
-                <Button
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    imageUrl="@{viewModel.imagePath}"
+                    android:layout_width="@dimen/avatar_image_size"
+                    android:layout_height="@dimen/avatar_image_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
                     android:id="@+id/next_button"
-                    style="?android:attr/borderlessButtonStyle"
+                    style="@style/Widget.AppCompat.ActionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
                     android:alpha="@{viewModel.nextButtonAlpha}"
                     android:enabled="@{viewModel.nextEnabled}"
                     android:text="@string/next"
-                    android:textAllCaps="false"
                     android:textColor="@color/action_color"
+                    android:textSize="@dimen/font_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
