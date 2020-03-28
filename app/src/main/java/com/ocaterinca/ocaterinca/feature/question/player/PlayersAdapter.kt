@@ -8,23 +8,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ocaterinca.ocaterinca.PlayerItemBinding
 import com.ocaterinca.ocaterinca.R
+import com.ocaterinca.ocaterinca.core.model.Player
 
-private val PLAYER_DIFF_CALLBACK = object : DiffUtil.ItemCallback<PlayerItemViewModel>() {
-    override fun areItemsTheSame(oldItem: PlayerItemViewModel, newItem: PlayerItemViewModel) = oldItem.avatarUrl == newItem.avatarUrl
+private val PLAYER_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Player>() {
+    override fun areItemsTheSame(oldItem: Player, newItem: Player) = oldItem.userId == newItem.userId
 
-    override fun areContentsTheSame(oldItem: PlayerItemViewModel, newItem: PlayerItemViewModel) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Player, newItem: Player) = oldItem == newItem
 }
 
-class PlayersAdapter : ListAdapter<PlayerItemViewModel, PlayersAdapter.PlayerViewHolder>(
-    PLAYER_DIFF_CALLBACK
-) {
+class PlayersAdapter : ListAdapter<Player, PlayersAdapter.PlayerViewHolder>(PLAYER_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PlayerViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_player, parent, false))
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding.viewModel = item
+        holder.binding.viewModel = PlayerItemViewModel(item.image, item.voted)
         holder.binding.executePendingBindings()
     }
 

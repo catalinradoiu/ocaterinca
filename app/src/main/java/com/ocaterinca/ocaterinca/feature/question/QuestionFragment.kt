@@ -17,11 +17,12 @@ import com.ocaterinca.ocaterinca.utils.AutoClearedValue
 import com.ocaterinca.ocaterinca.utils.MessageService
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuestionFragment : Fragment() {
 
     private lateinit var binding: QuestionFragmentBinding
-    private val viewModel = QuestionViewModel()
+    private val questionViewModel: QuestionViewModel by viewModel()
 
     private var layoutManager by AutoClearedValue<GridLayoutManager>()
     private var playersAdapter by AutoClearedValue<PlayersAdapter>()
@@ -40,7 +41,7 @@ class QuestionFragment : Fragment() {
         playersAdapter = PlayersAdapter()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@QuestionFragment.viewModel
+            viewModel = this@QuestionFragment.questionViewModel
             binding.playersList.apply {
                 adapter = playersAdapter
                 layoutManager = this@QuestionFragment.layoutManager
@@ -50,7 +51,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.playersList.observe(viewLifecycleOwner, Observer {
+        questionViewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
             if (it.isEmpty()) {
                 return@Observer
@@ -62,12 +63,12 @@ class QuestionFragment : Fragment() {
         })
 
         MessageService.messageReceiver.observe(viewLifecycleOwner, Observer {
-            viewModel.gotPush(it)
+            questionViewModel.gotPush(it)
             toast("Got new message! ${it.javaClass} ${Gson().toJson(it)}")
         })
         gameViewModel.gameStarted.observe(viewLifecycleOwner, Observer {
             if (it) {
-                viewModel.start()
+                questionViewModel.start()
             }
         })
     }

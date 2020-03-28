@@ -15,7 +15,7 @@ import com.ocaterinca.ocaterinca.feature.question.player.PlayerItemViewModel
 import com.ocaterinca.ocaterinca.utils.Prefs
 import com.ocaterinca.ocaterinca.utils.grabString
 
-class QuestionViewModel : ViewModel() {
+class QuestionViewModel(questionsInteractor: QuestionsInteractor) : ViewModel() {
 
     val choosePlayerViewModel = ChoosePlayerViewModel(this::votePlayer1, this::votePlayer2)
     val choosePlayerState = ObservableField<ChoosePlayerViewModel.State>()
@@ -24,6 +24,8 @@ class QuestionViewModel : ViewModel() {
     val showNext = ObservableBoolean(false)
     val showRestart = ObservableBoolean(false)
     val nextText = ObservableField<String>()
+
+    val playersList = questionsInteractor.getPlayersLiveData()
 
     fun start() {
         nextText.set(grabString(R.string.start))
@@ -44,9 +46,6 @@ class QuestionViewModel : ViewModel() {
         showRestart.set(Prefs.isAdmin == true)
         nextText.set(grabString(R.string.next))
         when (push) {
-            is RefreshUsersPush -> {
-                _playersList.value = playersToViewModel(push.players)
-            }
             is NewRoundPush -> {
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
                 questionText.set(push.title)
@@ -72,10 +71,4 @@ class QuestionViewModel : ViewModel() {
     private fun votePlayer2() {
         // backend request
     }
-
-    private val _playersList = MutableLiveData<List<PlayerItemViewModel>>().apply {
-        value = mutableListOf()
-    }
-    val playersList: LiveData<List<PlayerItemViewModel>> = _playersList
-
 }
