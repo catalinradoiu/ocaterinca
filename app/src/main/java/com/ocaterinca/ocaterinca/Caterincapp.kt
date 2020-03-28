@@ -4,6 +4,7 @@ import android.app.Application
 import com.ocaterinca.ocaterinca.data.di.AppModules
 import com.orhanobut.hawk.Hawk
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class Caterincapp : Application() {
 
@@ -11,6 +12,7 @@ class Caterincapp : Application() {
         super.onCreate()
         initPrefs()
         initDI()
+        initLogging()
     }
 
     private fun initPrefs() {
@@ -20,6 +22,12 @@ class Caterincapp : Application() {
     private fun initDI() {
         startKoin {
             modules(AppModules.modules)
+        }
+    }
+
+    private fun initLogging() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
     }
 }

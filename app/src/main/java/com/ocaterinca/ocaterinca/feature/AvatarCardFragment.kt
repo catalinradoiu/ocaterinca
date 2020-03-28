@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.google.gson.Gson
 import com.ocaterinca.ocaterinca.AvatarCardFragmentBinding
 import com.ocaterinca.ocaterinca.R
+import com.ocaterinca.ocaterinca.utils.MessageService
+import org.jetbrains.anko.support.v4.toast
 import pl.aprilapps.easyphotopicker.ChooserType
 import pl.aprilapps.easyphotopicker.EasyImage
 import pl.aprilapps.easyphotopicker.MediaFile
