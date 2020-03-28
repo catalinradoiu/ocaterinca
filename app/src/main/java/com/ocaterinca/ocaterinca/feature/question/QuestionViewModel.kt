@@ -44,7 +44,7 @@ class QuestionViewModel : ViewModel() {
                     false
                 )
             )
-        }, 3000)
+        }, 6000)
 
         Handler().postDelayed({
             gotPush(
