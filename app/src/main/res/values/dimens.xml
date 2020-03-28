@@ -3,4 +3,7 @@
     <dimen name="primary_margin">16dp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="avatar_image_size">120dp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="player_avatar_size">72dp</dimen>
+    <dimen name="question_card_vertical_margin">64dp</dimen>
 </resources>
