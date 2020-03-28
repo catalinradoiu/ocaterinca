@@ -59,6 +59,16 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
+    // other
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.github.jkwiecien:EasyImage:3.0.3'
+
+    // anko
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    implementation "org.jetbrains.anko:anko-sdk25-coroutines:0.10.8"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:0.10.8"
+    implementation "org.jetbrains.anko:anko-design:0.10.8"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
