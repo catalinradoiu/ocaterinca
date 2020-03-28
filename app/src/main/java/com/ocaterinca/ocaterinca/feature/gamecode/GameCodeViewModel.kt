@@ -21,6 +21,9 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _hasJoinedGroup = MutableLiveData<Boolean>()
+    val hasJoinedGroup: LiveData<Boolean> = _hasJoinedGroup
+
     val nextButtonAlpha = dependantLiveData(nextEnabled, isLoading) {
         if (nextEnabled.value == true || isLoading.value == true) 1f else .5f
     }
@@ -35,6 +38,7 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
             _isLoading.value = true
             val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
             Prefs.isAdmin = response.isAdmin
+            _hasJoinedGroup.value = true
             Timber.e("Is admin : ${response.isAdmin}")
             _isLoading.value = false
         }

@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.ocaterinca.ocaterinca.AvatarCardFragmentBinding
+import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.R
+import com.ocaterinca.ocaterinca.core.model.GameStep
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.aprilapps.easyphotopicker.ChooserType
 import pl.aprilapps.easyphotopicker.EasyImage
@@ -27,13 +31,10 @@ class AvatarCardFragment : Fragment() {
 
     private lateinit var binding: AvatarCardFragmentBinding
     private val avatarCardViewModel: AvatarCardViewModel by viewModel()
+    private val parentViewModel: GameViewModel by sharedViewModel()
     private lateinit var easyImage: EasyImage
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_avatar_card, container, false)
         return binding.root
     }
@@ -46,6 +47,7 @@ class AvatarCardFragment : Fragment() {
         }
         initImagePicker()
         initListeners()
+        initObservers()
     }
 
     private fun initListeners() {
@@ -63,6 +65,12 @@ class AvatarCardFragment : Fragment() {
         easyImage = EasyImage.Builder(requireContext())
             .setChooserType(ChooserType.CAMERA_AND_GALLERY)
             .build()
+    }
+
+    private fun initObservers() {
+        avatarCardViewModel.avatarUploaded.observe(viewLifecycleOwner, Observer {
+            parentViewModel.finishedStep.value = GameStep.AVATAR_UPLOAD
+        })
     }
 
 
