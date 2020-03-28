@@ -13,6 +13,7 @@ import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.QuestionFragmentBinding
 import com.ocaterinca.ocaterinca.R
 import com.ocaterinca.ocaterinca.feature.question.player.PlayersAdapter
+import com.ocaterinca.ocaterinca.utils.AutoClearedValue
 import com.ocaterinca.ocaterinca.utils.MessageService
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -22,6 +23,8 @@ class QuestionFragment : Fragment() {
     private lateinit var binding: QuestionFragmentBinding
     private val playersAdapter = PlayersAdapter()
     private val viewModel = QuestionViewModel()
+
+    private var layoutManager by AutoClearedValue<GridLayoutManager>()
 
     private val gameViewModel: GameViewModel by sharedViewModel()
     private var lastItemsCount = -1
@@ -33,11 +36,13 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        layoutManager = GridLayoutManager(context, 0)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@QuestionFragment.viewModel
             binding.playersList.apply {
                 adapter = playersAdapter
+                layoutManager = this@QuestionFragment.layoutManager
             }
         }
         initObservers()
@@ -47,7 +52,7 @@ class QuestionFragment : Fragment() {
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
             if (lastItemsCount != it.size) {
-                binding.playersList.layoutManager = GridLayoutManager(requireContext(), it.size)
+                layoutManager.spanCount = it.size
                 lastItemsCount = it.size
             }
         })
