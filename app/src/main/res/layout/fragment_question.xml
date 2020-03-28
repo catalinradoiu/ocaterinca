@@ -53,7 +53,7 @@
                     android:layout_marginTop="@dimen/primary_margin"
                     android:layout_marginEnd="@dimen/primary_margin"
                     android:gravity="center"
-                    android:text="@{viewModel.nextText}}"
+                    android:text="@{viewModel.nextText}"
                     android:textColor="@color/action_color"
                     android:textSize="@dimen/large_text_size"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +77,8 @@
                     tools:text="Some text for this question" />
 
                 <com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerView
-                    choosePlayerState="@{viewModel.choosePlayerState}"
-                    choosePlayerViewModel="@{viewModel.choosePlayerViewModel}"
+                    app:choosePlayerState="@{viewModel.choosePlayerState}"
+                    app:choosePlayerViewModel="@{viewModel.choosePlayerViewModel}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toTopOf="@id/players_list"
