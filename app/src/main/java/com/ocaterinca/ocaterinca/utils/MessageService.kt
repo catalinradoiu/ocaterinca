@@ -17,6 +17,10 @@ class MessageService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         try {
             val pushData = gson.fromJson(message.data.toString(), PushMessage::class.java)
+            if (pushData.roomId != Prefs.roomId) {
+                Timber.e("Receiving invalid push from room ${pushData.roomId}")
+                return
+            }
             var pushEvent: Any? = null
             when (pushData.event) {
                 PushType.REFRESH_USERS -> {

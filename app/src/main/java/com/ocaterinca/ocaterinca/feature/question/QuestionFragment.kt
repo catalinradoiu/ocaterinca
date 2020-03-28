@@ -36,7 +36,7 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        layoutManager = GridLayoutManager(context, 0)
+        layoutManager = GridLayoutManager(context, 1)
         playersAdapter = PlayersAdapter()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -52,6 +52,9 @@ class QuestionFragment : Fragment() {
     private fun initObservers() {
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
+            if (it.isEmpty()) {
+                return@Observer
+            }
             if (lastItemsCount != it.size) {
                 layoutManager.spanCount = it.size
                 lastItemsCount = it.size
