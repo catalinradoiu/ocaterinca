@@ -72,7 +72,7 @@ class QuestionViewModel : ViewModel() {
                 gotPush(
                     RefreshUsersPush(
                         players = mutableListOf<Player>().apply {
-                            for (j in 1..i+1) {
+                            for (j in 1..i + 1) {
                                 add(Player("1", "https://www.w3schools.com/w3images/avatar$j.png", Math.random() < .5))
                             }
                         }
@@ -100,7 +100,7 @@ class QuestionViewModel : ViewModel() {
         }.toMutableList()
     }
 
-    private fun gotPush(push: Any?) {
+    fun gotPush(push: Any?) {
         showRestart.set(Prefs.isAdmin == true)
         nextText.set(grabString(R.string.next))
         when (push) {

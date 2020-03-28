@@ -24,6 +24,7 @@ class QuestionFragment : Fragment() {
     private val viewModel = QuestionViewModel()
 
     private val gameViewModel: GameViewModel by sharedViewModel()
+    private var lastItemsCount = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false)
@@ -45,10 +46,14 @@ class QuestionFragment : Fragment() {
     private fun initObservers() {
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
-            binding.playersList.layoutManager = GridLayoutManager(requireContext(), it.size)
+            if (lastItemsCount != it.size) {
+                binding.playersList.layoutManager = GridLayoutManager(requireContext(), it.size)
+                lastItemsCount = it.size
+            }
         })
 
         MessageService.messageReceiver.observe(viewLifecycleOwner, Observer {
+            viewModel.gotPush(it)
             toast("Got new message! ${it.javaClass} ${Gson().toJson(it)}")
         })
         gameViewModel.gameStarted.observe(viewLifecycleOwner, Observer {
