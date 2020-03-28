@@ -11,7 +11,7 @@ import com.ocaterinca.ocaterinca.R
 import com.ocaterinca.ocaterinca.core.model.Player
 
 private val PLAYER_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Player>() {
-    override fun areItemsTheSame(oldItem: Player, newItem: Player) = oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Player, newItem: Player) = oldItem.userId == newItem.userId
 
     override fun areContentsTheSame(oldItem: Player, newItem: Player) = oldItem == newItem
 }
@@ -34,8 +34,8 @@ class PlayersAdapter : ListAdapter<Player, PlayersAdapter.PlayerViewHolder>(
         }
 
         fun bind(player: Player) {
-            binding.viewModel.apply {
-                avatarUrl.set(player.avatarUrl)
+            binding.viewModel?.apply {
+                avatarUrl.set(player.image)
             }
         }
     }

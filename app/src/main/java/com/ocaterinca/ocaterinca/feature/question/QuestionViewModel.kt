@@ -23,9 +23,9 @@ class QuestionViewModel : ViewModel() {
 
     companion object {
         private val PLAYERS_MOCK_LIST = listOf(
-            Player("1", "https://www.w3schools.com/w3images/avatar2.png"),
-            Player("1", "https://www.w3schools.com/w3images/avatar2.png"),
-            Player("1", "https://www.w3schools.com/w3images/avatar2.png")
+            Player("1", "https://www.w3schools.com/w3images/avatar2.png",false),
+            Player("1", "https://www.w3schools.com/w3images/avatar2.png",true),
+            Player("1", "https://www.w3schools.com/w3images/avatar2.png",false)
         )
     }
 

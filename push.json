@@ -1,0 +1,57 @@
+[
+  {
+    "event": "REFRESH_USERS",
+    "data": {
+      "players": [
+        {
+          "image": "url",
+          "voted": false
+        },
+        {
+          "image": "url",
+          "voted": true
+        }
+      ]
+    }
+  },
+  {
+    "event": "NEW_ROUND",
+    "data": {
+      "title": "1. Cine e mai destept?",
+      "player1": {
+        "userId": "fane",
+        "image": "url"
+      },
+      "player2": {
+        "userId": "fane",
+        "image": "url"
+      }
+    }
+  },
+  {
+    "event": "ROUND_OVER",
+    "data": {
+      "title": "1. Cine e cel mai destept?",
+      "winnerImage": "image",
+      "loserImage": "image"
+    }
+  },
+  {
+    "event": "GAME_OVER",
+    "data": {
+      "players": [
+        {
+          "image": "imagepath",
+          "text": "emoji cool blabla"
+        },
+        {
+          "image": "imagepath",
+          "text": "emoji cool blabla"
+        }
+      ]
+    }
+  },
+  {
+    "event": "GAME_RESTART"
+  }
+]

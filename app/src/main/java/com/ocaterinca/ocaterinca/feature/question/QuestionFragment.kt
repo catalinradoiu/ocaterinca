@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.ocaterinca.ocaterinca.QuestionFragmentBinding
 import com.ocaterinca.ocaterinca.R
 import com.ocaterinca.ocaterinca.feature.question.player.PlayersAdapter
+import com.ocaterinca.ocaterinca.utils.MessageService
+import org.jetbrains.anko.support.v4.toast
 
 class QuestionFragment : Fragment() {
 
@@ -33,6 +36,10 @@ class QuestionFragment : Fragment() {
 
         viewModel.playersList.observe(viewLifecycleOwner, Observer {
             playersAdapter.submitList(it)
+        })
+
+        MessageService.messageReceiver.observe(viewLifecycleOwner, Observer {
+            toast("Got new message! ${it.javaClass} ${Gson().toJson(it)}")
         })
     }
 
