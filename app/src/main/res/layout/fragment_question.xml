@@ -12,15 +12,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/primary_margin"
-        android:layout_marginTop="@dimen/question_card_vertical_margin"
-        android:layout_marginEnd="@dimen/large_text_size"
-        android:layout_marginBottom="@dimen/question_card_vertical_margin">
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="@dimen/primary_margin"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,8 +36,8 @@
                     android:layout_marginTop="@dimen/primary_margin"
                     android:layout_marginEnd="@dimen/primary_margin"
                     android:gravity="center"
-                    android:textColor="@color/text_color"
                     android:text="@{viewModel.questionText}"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/large_text_size"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -52,12 +49,12 @@
                     android:id="@+id/first_player_image"
                     android:layout_width="@dimen/player_avatar_size"
                     android:layout_height="@dimen/player_avatar_size"
+                    app:imageUrl="@{viewModel.firstPlayerAvatarUrl}"
                     app:layout_constraintBottom_toTopOf="@id/players_list"
                     app:layout_constraintEnd_toStartOf="@id/vs_text"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/question_text"
-                    app:imageUrl="@{viewModel.firstPlayerAvatarUrl}"
                     tools:ignore="ContentDescription"
                     tools:src="@tools:sample/avatars" />
 
@@ -80,11 +77,11 @@
                     android:id="@+id/second_player_image"
                     android:layout_width="@dimen/player_avatar_size"
                     android:layout_height="@dimen/player_avatar_size"
+                    app:imageUrl="@{viewModel.secondPlayerAvatarUrl}"
                     app:layout_constraintBottom_toTopOf="@id/players_list"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/vs_text"
                     app:layout_constraintTop_toBottomOf="@id/question_text"
-                    app:imageUrl="@{viewModel.secondPlayerAvatarUrl}"
                     tools:ignore="ContentDescription"
                     tools:src="@tools:sample/avatars" />
 
@@ -92,11 +89,11 @@
                     android:id="@+id/players_list"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="@dimen/primary_margin"
                     android:clipToPadding="false"
                     android:paddingStart="@dimen/primary_margin"
                     android:paddingEnd="@dimen/primary_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 

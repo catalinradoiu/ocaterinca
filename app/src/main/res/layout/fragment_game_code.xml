@@ -39,6 +39,7 @@
                     android:gravity="center"
                     android:hint="@string/new_game_code"
                     android:importantForAutofill="no"
+                    android:textSize="@dimen/large_text_size"
                     android:inputType="text"
                     android:text="@={viewModel.gameCode}"
                     android:textColor="@color/light_gray"
@@ -57,7 +58,7 @@
                     android:enabled="@{viewModel.nextEnabled}"
                     android:text="@string/create_or_join"
                     android:textColor="@color/action_color"
-                    android:textSize="@dimen/font_size"
+                    android:textSize="@dimen/large_text_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
