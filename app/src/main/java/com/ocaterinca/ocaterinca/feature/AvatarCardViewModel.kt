@@ -27,6 +27,9 @@ class AvatarCardViewModel(private val avatarCardInteractor: AvatarCardInteractor
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _avatarUploaded = MutableLiveData<Boolean>()
+    val avatarUploaded: LiveData<Boolean> = _avatarUploaded
+
     private var imageBase64: String? = null
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _isLoading.value = false
@@ -42,6 +45,7 @@ class AvatarCardViewModel(private val avatarCardInteractor: AvatarCardInteractor
             viewModelScope.launch(exceptionHandler) {
                 _isLoading.value = true
                 Prefs.userId = avatarCardInteractor.uploadImage(it, Prefs.token.orEmpty())
+                _avatarUploaded.value = true
                 _isLoading.value = false
             }
         }
