@@ -1,11 +1,11 @@
-package com.dtl.kaloric.refactoring.utils
+package com.ocaterinca.ocaterinca.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.media.ExifInterface
-import java.io.File
-import java.io.FileOutputStream
+import android.util.Base64OutputStream
+import androidx.exifinterface.media.ExifInterface
+import java.io.*
 
 object ImageUtils {
 
@@ -37,7 +37,7 @@ object ImageUtils {
         return rotatedBitmap
     }
 
-    fun resizeImageKeepAspectRatio(photoPath: String?, maxWidth: Int, maxHeight: Int): File {
+    fun resizeImageKeepAspectRatio(photoPath: String?, maxWidth: Int, maxHeight: Int): Base64Image {
         var image = createBitmapFromPath(photoPath)!!
         val width = image.width
         val height = image.height
@@ -53,6 +53,23 @@ object ImageUtils {
         image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
         val newFile = File.createTempFile("kaloric", ".jpg")
         image.compress(Bitmap.CompressFormat.JPEG, 90, FileOutputStream(newFile))
-        return newFile
+        return Base64Image(newFile, convertImageFileToBase64(newFile))
     }
+
+    private fun convertImageFileToBase64(imageFile: File): String {
+        return FileInputStream(imageFile).use { inputStream ->
+            ByteArrayOutputStream().use { outputStream ->
+                Base64OutputStream(
+                    outputStream,
+                    android.util.Base64.DEFAULT
+                ).use { base64FilterStream ->
+                    inputStream.copyTo(base64FilterStream)
+                    base64FilterStream.close()
+                    outputStream.toString()
+                }
+            }
+        }
+    }
+
+    data class Base64Image(val file: File, val base64: String)
 }
