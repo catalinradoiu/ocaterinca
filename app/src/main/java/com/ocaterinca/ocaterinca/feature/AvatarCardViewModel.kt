@@ -29,6 +29,7 @@ class AvatarCardViewModel(private val avatarCardInteractor: AvatarCardInteractor
 
     private var imageBase64: String? = null
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _isLoading.value = false
         Timber.e("Caught exception : $throwable")
     }
 
