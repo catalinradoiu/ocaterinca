@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toTopOf="@id/player_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:visibleGone="@{viewModel.voted}"
+            app:visibleInvisible="@{viewModel.voted}"
             tools:ignore="ContentDescription" />
 
         <ImageView
