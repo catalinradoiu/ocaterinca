@@ -3,7 +3,6 @@ package com.ocaterinca.ocaterinca.feature.question
 import android.os.Handler
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import com.ocaterinca.ocaterinca.core.model.Player
 import com.ocaterinca.ocaterinca.core.model.RoundOverPush
 import com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerViewModel
 import com.ocaterinca.ocaterinca.utils.Prefs
+import com.ocaterinca.ocaterinca.utils.grabString
 
 class QuestionViewModel : ViewModel() {
 
@@ -22,9 +22,9 @@ class QuestionViewModel : ViewModel() {
 
     val showNext = ObservableBoolean(false)
     val showRestart = ObservableBoolean(false)
-    val nextText = ObservableInt()
+    val nextText = ObservableField<String>()
 
-    init {
+    private fun mockEvents() {
         gotPush(
             NewRoundPush(
                 "1. Cine e mai smecher?",
@@ -67,14 +67,15 @@ class QuestionViewModel : ViewModel() {
     }
 
     fun start() {
-        nextText.set(R.string.start)
+        nextText.set(grabString(R.string.start))
         showNext.set(Prefs.isAdmin == true)
         showRestart.set(false)
+        mockEvents()
     }
 
     private fun gotPush(push: Any?) {
         showRestart.set(Prefs.isAdmin == true)
-        nextText.set(R.string.next)
+        nextText.set(grabString(R.string.next))
         when (push) {
             is NewRoundPush -> {
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
