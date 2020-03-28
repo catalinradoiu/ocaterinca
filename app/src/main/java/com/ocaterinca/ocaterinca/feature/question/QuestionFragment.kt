@@ -21,10 +21,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class QuestionFragment : Fragment() {
 
     private lateinit var binding: QuestionFragmentBinding
-    private val playersAdapter = PlayersAdapter()
     private val viewModel = QuestionViewModel()
 
     private var layoutManager by AutoClearedValue<GridLayoutManager>()
+    private var playersAdapter by AutoClearedValue<PlayersAdapter>()
 
     private val gameViewModel: GameViewModel by sharedViewModel()
     private var lastItemsCount = -1
@@ -37,6 +37,7 @@ class QuestionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         layoutManager = GridLayoutManager(context, 0)
+        playersAdapter = PlayersAdapter()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@QuestionFragment.viewModel
