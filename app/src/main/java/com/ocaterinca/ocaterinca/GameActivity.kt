@@ -7,7 +7,6 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.ocaterinca.ocaterinca.databinding.ActivityGameBinding
 import com.ocaterinca.ocaterinca.utils.Prefs
 import org.jetbrains.anko.toast
-import timber.log.Timber
 
 class GameActivity : AppCompatActivity() {
 
@@ -34,7 +33,6 @@ class GameActivity : AppCompatActivity() {
                 // Get new Instance ID token
                 val token = task.result?.token
                 Prefs.token = token
-                Timber.e(token)
                 binding.mainPager.adapter = gameAdapter
             })
     }
