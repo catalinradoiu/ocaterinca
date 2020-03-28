@@ -40,6 +40,7 @@
                     android:layout_marginEnd="@dimen/primary_margin"
                     android:gravity="center"
                     android:textColor="@color/black"
+                    android:text="@{viewModel.questionText}"
                     android:textSize="@dimen/large_text_size"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
