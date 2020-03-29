@@ -44,12 +44,12 @@ class QuestionViewModel(private val questionsInteractor: QuestionsInteractor) : 
     }
 
     fun gotPush(push: Any?) {
-        showRestart.set(Prefs.isAdmin == true)
         when (push) {
             is RefreshUsersPush -> {
                 _playersList.value = push.players
             }
             is NewRoundPush -> {
+                showRestart.set(Prefs.isAdmin == true)
                 firstRoundStarted = true
                 showChoosePlayers.set(true)
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
@@ -69,6 +69,7 @@ class QuestionViewModel(private val questionsInteractor: QuestionsInteractor) : 
             }
             is GameOverPush -> {
                 showNext.set(false)
+                showRestart.set(false)
                 firstRoundStarted = false
                 showChoosePlayers.set(false)
             }
