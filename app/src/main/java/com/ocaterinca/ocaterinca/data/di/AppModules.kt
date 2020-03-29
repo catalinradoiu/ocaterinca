@@ -46,7 +46,7 @@ object AppModules {
     private val interactorModule = module {
         single { AvatarCardInteractor(get()) }
         single { GameCodeInteractor(get()) }
-        single { QuestionsInteractor() }
+        single { QuestionsInteractor(get()) }
     }
 
     private val viewModelModule = module {

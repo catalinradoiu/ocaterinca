@@ -38,7 +38,7 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
     fun createOrJoinGroup() {
         viewModelScope.launch(exceptionHandler) {
             _isLoading.value = true
-            val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
+            val response = gameCodeInteractor.uploadGameCode(Prefs.userId, gameCode.value)
             Prefs.isAdmin = response.isAdmin
             Prefs.roomId = response.roomId
             sharedViewModel.initialPlayers = response.players
