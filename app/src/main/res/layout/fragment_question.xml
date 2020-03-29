@@ -31,6 +31,7 @@
                 <TextView
                     android:id="@+id/restart_text"
                     style="@style/Widget.AppCompat.ActionButton"
+                    visibleGone="@{viewModel.showRestart}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/primary_margin"
@@ -38,7 +39,6 @@
                     android:layout_marginEnd="@dimen/primary_margin"
                     android:gravity="center"
                     android:text="@string/restart"
-                    visibleGone="@{viewModel.showRestart}"
                     android:textColor="@color/action_color"
                     android:textSize="@dimen/large_text_size"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +46,8 @@
 
                 <TextView
                     android:id="@+id/next_text"
-                    visibleGone="@{viewModel.showNext}"
                     style="@style/Widget.AppCompat.ActionButton"
+                    visibleGone="@{viewModel.showNext}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/primary_margin"
@@ -77,10 +77,11 @@
                     tools:text="Some text for this question" />
 
                 <com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerView
-                    app:choosePlayerState="@{viewModel.choosePlayerState}"
-                    app:choosePlayerViewModel="@{viewModel.choosePlayerViewModel}"
+                    visibleGone="@{viewModel.showChoosePlayers}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    app:choosePlayerState="@{viewModel.choosePlayerState}"
+                    app:choosePlayerViewModel="@{viewModel.choosePlayerViewModel}"
                     app:layout_constraintBottom_toTopOf="@id/players_list"
                     app:layout_constraintTop_toBottomOf="@id/question_text" />
 

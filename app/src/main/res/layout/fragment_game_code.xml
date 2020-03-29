@@ -51,14 +51,15 @@
                     android:gravity="center"
                     android:hint="@string/new_game_code"
                     android:importantForAutofill="no"
-                    android:textSize="@dimen/large_text_size"
                     android:inputType="text"
                     android:text="@={viewModel.gameCode}"
                     android:textColor="@color/light_gray"
+                    android:textSize="@dimen/large_text_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibleGone="@{!viewModel.isLoading}" />
 
                 <Button
                     android:id="@+id/next_button"

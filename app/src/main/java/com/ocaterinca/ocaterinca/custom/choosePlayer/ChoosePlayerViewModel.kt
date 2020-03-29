@@ -34,6 +34,7 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
         if (roundOver || player1Selected.get() || player2Selected.get()) {
             return
         }
+        votePlayer1()
         player1Selected.set(true)
         player2Selected.set(false)
     }
@@ -42,6 +43,7 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
         if (player1Selected.get() || player2Selected.get()) {
             return
         }
+        votePlayer2()
         player1Selected.set(false)
         player2Selected.set(true)
     }
