@@ -40,7 +40,7 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
     }
 
     fun player2Tap() {
-        if (player1Selected.get() || player2Selected.get()) {
+        if (roundOver || player1Selected.get() || player2Selected.get()) {
             return
         }
         votePlayer2()

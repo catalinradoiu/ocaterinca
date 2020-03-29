@@ -49,6 +49,7 @@ class QuestionViewModel(private val questionsInteractor: QuestionsInteractor) : 
                 _playersList.value = push.players
             }
             is NewRoundPush -> {
+                nextText.set(grabString(R.string.next))
                 showRestart.set(Prefs.isAdmin == true)
                 firstRoundStarted = true
                 showChoosePlayers.set(true)
@@ -100,10 +101,14 @@ class QuestionViewModel(private val questionsInteractor: QuestionsInteractor) : 
     }
 
     private fun votePlayer1() {
-        // backend request
+        viewModelScope.launch(exceptionHandler) {
+            questionsInteractor.answer(true)
+        }
     }
 
     private fun votePlayer2() {
-        // backend request
+        viewModelScope.launch(exceptionHandler) {
+            questionsInteractor.answer(false)
+        }
     }
 }
