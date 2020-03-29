@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ocaterinca.ocaterinca.GameViewModel
 import com.ocaterinca.ocaterinca.utils.Prefs
 import com.ocaterinca.ocaterinca.utils.dependantLiveData
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -12,6 +13,7 @@ import timber.log.Timber
 
 class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : ViewModel() {
 
+    lateinit var sharedViewModel: GameViewModel
     val gameCode = MutableLiveData<String>()
 
     val nextEnabled = dependantLiveData(gameCode) {
@@ -39,9 +41,8 @@ class GameCodeViewModel(private val gameCodeInteractor: GameCodeInteractor) : Vi
             val response = gameCodeInteractor.uploadGameCode(Prefs.userId.orEmpty(), gameCode.value.orEmpty())
             Prefs.isAdmin = response.isAdmin
             Prefs.roomId = response.roomId
-//            response.players
+            sharedViewModel.initialPlayers = response.players
             _hasJoinedGroup.value = true
-            Timber.e("Is admin : ${response.isAdmin}")
             _isLoading.value = false
         }
     }

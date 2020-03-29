@@ -11,7 +11,6 @@ import com.ocaterinca.ocaterinca.core.model.Player
 import com.ocaterinca.ocaterinca.core.model.RefreshUsersPush
 import com.ocaterinca.ocaterinca.core.model.RoundOverPush
 import com.ocaterinca.ocaterinca.custom.choosePlayer.ChoosePlayerViewModel
-import com.ocaterinca.ocaterinca.feature.question.player.PlayerItemViewModel
 import com.ocaterinca.ocaterinca.utils.Prefs
 import com.ocaterinca.ocaterinca.utils.grabString
 
@@ -25,27 +24,26 @@ class QuestionViewModel(questionsInteractor: QuestionsInteractor) : ViewModel() 
     val showRestart = ObservableBoolean(false)
     val nextText = ObservableField<String>()
 
-    val playersList = questionsInteractor.getPlayersLiveData()
+    private val _playersList = MutableLiveData<List<Player>>()
+    val playersList: LiveData<List<Player>> = _playersList
 
-    fun start() {
+
+    fun start(initialPlayers: MutableList<Player>?) {
         nextText.set(grabString(R.string.start))
         showNext.set(Prefs.isAdmin == true)
         showRestart.set(false)
-    }
-
-    private fun playersToViewModel(players: Collection<Player>): MutableList<PlayerItemViewModel> {
-        return players.map {
-            PlayerItemViewModel(
-                avatarUrl = it.image,
-                voted = it.voted
-            )
-        }.toMutableList()
+        initialPlayers?.let { players ->
+            _playersList.value = players
+        }
     }
 
     fun gotPush(push: Any?) {
         showRestart.set(Prefs.isAdmin == true)
         nextText.set(grabString(R.string.next))
         when (push) {
+            is RefreshUsersPush -> {
+                _playersList.value = push.players
+            }
             is NewRoundPush -> {
                 choosePlayerState.set(ChoosePlayerViewModel.State.PickPlayer)
                 questionText.set(push.title)

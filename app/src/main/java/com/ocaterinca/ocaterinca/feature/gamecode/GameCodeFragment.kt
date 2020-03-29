@@ -26,7 +26,7 @@ class GameCodeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        gameCodeViewModel.sharedViewModel = parentViewModel
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@GameCodeFragment.gameCodeViewModel

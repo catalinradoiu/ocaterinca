@@ -68,7 +68,7 @@ class QuestionFragment : Fragment() {
         })
         gameViewModel.gameStarted.observe(viewLifecycleOwner, Observer {
             if (it) {
-                questionViewModel.start()
+                questionViewModel.start(gameViewModel.initialPlayers)
             }
         })
     }

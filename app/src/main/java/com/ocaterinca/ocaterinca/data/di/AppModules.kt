@@ -2,7 +2,6 @@ package com.ocaterinca.ocaterinca.data.di
 
 import com.ocaterinca.ocaterinca.BuildConfig
 import com.ocaterinca.ocaterinca.GameViewModel
-import com.ocaterinca.ocaterinca.core.data.PlayersRepository
 import com.ocaterinca.ocaterinca.feature.AvatarCardInteractor
 import com.ocaterinca.ocaterinca.feature.AvatarCardViewModel
 import com.ocaterinca.ocaterinca.feature.AvatarService
@@ -41,13 +40,13 @@ object AppModules {
     }
 
     private val repositoryModule = module {
-        single { PlayersRepository() }
+//        single { PlayersRepository() }
     }
 
     private val interactorModule = module {
         single { AvatarCardInteractor(get()) }
-        single { GameCodeInteractor(get(), get()) }
-        single { QuestionsInteractor(get()) }
+        single { GameCodeInteractor(get()) }
+        single { QuestionsInteractor() }
     }
 
     private val viewModelModule = module {
