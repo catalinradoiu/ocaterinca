@@ -7,11 +7,12 @@ import androidx.annotation.DimenRes
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.ocaterinca.ocaterinca.R
 
 
 @BindingAdapter("imageUrl")
 fun ImageView.imageUrl(image: String?) {
-    Glide.with(this).load(image).apply(RequestOptions.circleCropTransform()).into(this)
+    Glide.with(this).load(image).placeholder(R.drawable.ic_account).apply(RequestOptions.circleCropTransform()).into(this)
 }
 
 @BindingAdapter("visibleGone")
