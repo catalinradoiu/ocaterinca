@@ -1,5 +1,7 @@
 package com.ocaterinca.ocaterinca.utils
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.view.View
 import android.widget.ImageView
@@ -18,6 +20,27 @@ fun ImageView.imageUrl(image: String?) {
 @BindingAdapter("visibleGone")
 fun View.setVisibleGone(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("visibleGoneAnimation")
+fun View.visibleOrGoneAnimation(visible: Boolean) {
+    if (visible) {
+        alpha = 0f
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .setDuration(400)
+            .setListener(null)
+    } else {
+        animate()
+            .alpha(0f)
+            .setDuration(400)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    visibility = View.GONE
+                }
+            })
+    }
 }
 
 @BindingAdapter("visibleInvisible")

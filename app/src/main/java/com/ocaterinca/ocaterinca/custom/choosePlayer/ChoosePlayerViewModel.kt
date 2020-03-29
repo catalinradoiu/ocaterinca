@@ -12,6 +12,9 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
     val player1Selected = ObservableBoolean(false)
     val player2Selected = ObservableBoolean(false)
 
+    val player1Won = ObservableBoolean(false)
+    val player2Won = ObservableBoolean(false)
+
     private var roundOver = false
 
     fun newRound(push: NewRoundPush) {
@@ -20,6 +23,8 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
         player2Image.set(push.player2Image)
         player1Selected.set(false)
         player2Selected.set(false)
+        player1Won.set(false)
+        player2Won.set(false)
     }
 
     fun roundOver(push: RoundOverPush) {
@@ -28,6 +33,8 @@ class ChoosePlayerViewModel(val votePlayer1: () -> Unit, val votePlayer2: () -> 
         roundOver = true
         player1Selected.set(false)
         player2Selected.set(false)
+        player1Won.set(push.player1Won == true)
+        player2Won.set(push.player1Won == false)
     }
 
     fun player1Tap() {

@@ -58,6 +58,7 @@ class QuestionViewModel(private val questionsInteractor: QuestionsInteractor) : 
                 choosePlayerViewModel.newRound(push)
             }
             is RoundOverPush -> {
+                _playersList.value = push.players
                 showChoosePlayers.set(true)
                 val state = when (push.player1Won) {
                     true -> ChoosePlayerViewModel.State.Player1Won

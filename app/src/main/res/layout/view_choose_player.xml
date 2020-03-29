@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="@id/player1_image" />
 
         <View
-            visibleGone="@{viewModel.player2Selected}"
+            visibleGoneAnimation="@{viewModel.player2Selected}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha=".5"
@@ -73,5 +73,75 @@
             app:layout_constraintEnd_toEndOf="@id/player2_image"
             app:layout_constraintStart_toStartOf="@id/player2_image"
             app:layout_constraintTop_toTopOf="@id/player2_image" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player1_image_toilet"
+            visibleGoneAnimation="@{viewModel.player2Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/player1_image"
+            app:layout_constraintEnd_toEndOf="@id/player1_image"
+            app:layout_constraintStart_toStartOf="@id/player1_image"
+            app:srcCompat="@drawable/toilet_paper" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player2_image_toilet"
+            visibleGoneAnimation="@{viewModel.player1Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/player2_image"
+            app:layout_constraintEnd_toEndOf="@id/player2_image"
+            app:layout_constraintStart_toStartOf="@id/player2_image"
+            app:srcCompat="@drawable/toilet_paper" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player1_image_crown"
+            visibleGoneAnimation="@{viewModel.player1Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="@id/player1_image"
+            app:layout_constraintEnd_toEndOf="@id/player1_image"
+            app:layout_constraintStart_toStartOf="@id/player1_image"
+            app:srcCompat="@drawable/crown" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player2_image_crown"
+            visibleGoneAnimation="@{viewModel.player2Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="@id/player2_image"
+            app:layout_constraintEnd_toEndOf="@id/player2_image"
+            app:layout_constraintStart_toStartOf="@id/player2_image"
+            app:srcCompat="@drawable/crown" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player1_image_weed"
+            visibleGoneAnimation="@{viewModel.player1Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/player1_image"
+            app:layout_constraintEnd_toEndOf="@id/player1_image"
+            app:layout_constraintStart_toStartOf="@id/player1_image"
+            app:layout_constraintTop_toTopOf="@id/player1_image"
+            app:srcCompat="@drawable/weed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player2_image_weed"
+            visibleGoneAnimation="@{viewModel.player2Won}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/player2_image"
+            app:layout_constraintEnd_toEndOf="@id/player2_image"
+            app:layout_constraintStart_toStartOf="@id/player2_image"
+            app:layout_constraintTop_toTopOf="@id/player2_image"
+            app:srcCompat="@drawable/weed" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
